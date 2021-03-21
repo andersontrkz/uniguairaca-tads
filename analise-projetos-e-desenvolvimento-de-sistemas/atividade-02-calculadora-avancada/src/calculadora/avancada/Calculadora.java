@@ -34,7 +34,7 @@ public class Calculadora extends javax.swing.JFrame {
         button5 = new javax.swing.JButton();
         button4 = new javax.swing.JButton();
         button6 = new javax.swing.JButton();
-        buttonAdd = new javax.swing.JButton();
+        buttonSum = new javax.swing.JButton();
         button8 = new javax.swing.JButton();
         button7 = new javax.swing.JButton();
         button9 = new javax.swing.JButton();
@@ -45,7 +45,7 @@ public class Calculadora extends javax.swing.JFrame {
         button0 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         labelVisor = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        labelResultado = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,12 +106,12 @@ public class Calculadora extends javax.swing.JFrame {
             }
         });
 
-        buttonAdd.setBackground(new java.awt.Color(241, 145, 92));
-        buttonAdd.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
-        buttonAdd.setText("+");
-        buttonAdd.addActionListener(new java.awt.event.ActionListener() {
+        buttonSum.setBackground(new java.awt.Color(241, 145, 92));
+        buttonSum.setFont(new java.awt.Font("Ubuntu", 1, 16)); // NOI18N
+        buttonSum.setText("+");
+        buttonSum.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddActionPerformed(evt);
+                buttonSumActionPerformed(evt);
             }
         });
 
@@ -190,7 +190,7 @@ public class Calculadora extends javax.swing.JFrame {
         labelVisor.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelVisor.setText("0");
 
-        jLabel1.setText("Resultado:");
+        labelResultado.setText("Resultado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,14 +201,14 @@ public class Calculadora extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelVisor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(labelResultado)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(labelResultado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(labelVisor)
                 .addContainerGap())
@@ -244,7 +244,7 @@ public class Calculadora extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(button6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(buttonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buttonSum, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(button0, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -281,7 +281,7 @@ public class Calculadora extends javax.swing.JFrame {
                     .addComponent(button5)
                     .addComponent(button4)
                     .addComponent(button6)
-                    .addComponent(buttonAdd))
+                    .addComponent(buttonSum))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -295,115 +295,52 @@ public class Calculadora extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(328, 329));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
-        if (labelVisor.getText() != "0"){
-            labelVisor.setText(labelVisor.getText() + 2);
-        } else {
-            labelVisor.setText("2");
-        }
+        inserir("2");
     }//GEN-LAST:event_button2ActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 2);
-        } else {
-            labelVisor.setText("2");
-        }
+        inserir("1");
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button3ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 3);
-        } else {
-            labelVisor.setText("3");
-        }
+        inserir("3");
     }//GEN-LAST:event_button3ActionPerformed
 
     private void buttonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEqualActionPerformed
-        String visor = labelVisor.getText();
-        int resultado = 0;
-        
-        if (visor.contains("+")){
-            String[] valor = visor.split("\\+");
-            resultado = Integer.parseInt(valor[0]) + Integer.parseInt(valor[1]);
-        } else if (visor.contains("-")){
-            String[] valor = visor.split("\\-");
-            resultado = Integer.parseInt(valor[0]) - Integer.parseInt(valor[1]);
-        } if (visor.contains("x")){
-            String[] valor = visor.split("x");
-            resultado = Integer.parseInt(valor[0]) * Integer.parseInt(valor[1]);
-        } else if (visor.contains("/")){
-            String[] valor = visor.split("\\/");
-            
-            if (valor[1] == "0") {
-                resultado = Integer.parseInt(valor[0]) / Integer.parseInt(valor[1]);
-            }
-        }
-        
-        visor = String.valueOf(resultado);
-        labelVisor.setText(visor);
+        calcular();
     }//GEN-LAST:event_buttonEqualActionPerformed
 
     private void button8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button8ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 8);
-        } else {
-            labelVisor.setText("8");
-        }
+        inserir("8");
     }//GEN-LAST:event_button8ActionPerformed
 
-    private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddActionPerformed
-        if ((!labelVisor.getText().contains("/")) &&
-                (!labelVisor.getText().contains("x")) &&
-                (!labelVisor.getText().contains("-")) &&
-                (!labelVisor.getText().contains("+"))) {
-            labelVisor.setText(labelVisor.getText() + "+");
-        }
-    }//GEN-LAST:event_buttonAddActionPerformed
+    private void buttonSumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSumActionPerformed
+        operacao("+");
+    }//GEN-LAST:event_buttonSumActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 6);
-        } else {
-            labelVisor.setText("6");
-        }
+       inserir("6");
     }//GEN-LAST:event_button6ActionPerformed
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 5);
-        } else {
-            labelVisor.setText("5");
-        }
+        inserir("4");
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button5ActionPerformed
-        if (labelVisor.getText() != "0"){
-            labelVisor.setText(labelVisor.getText() + 5);
-        } else {
-            labelVisor.setText("5");
-        }
+       inserir("5");
     }//GEN-LAST:event_button5ActionPerformed
 
     private void buttonMultiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonMultiActionPerformed
-        if ((!labelVisor.getText().contains("/")) &&
-                (!labelVisor.getText().contains("x")) &&
-                (!labelVisor.getText().contains("-")) &&
-                (!labelVisor.getText().contains("+"))) {
-            labelVisor.setText(labelVisor.getText() + "x");
-        }
+        operacao("x");
     }//GEN-LAST:event_buttonMultiActionPerformed
 
     private void buttonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonDivActionPerformed
-        if ((!labelVisor.getText().contains("/")) &&
-                (!labelVisor.getText().contains("x")) &&
-                (!labelVisor.getText().contains("-")) &&
-                (!labelVisor.getText().contains("+"))) {
-            labelVisor.setText(labelVisor.getText() + "/");
-        }
+        operacao("/");
     }//GEN-LAST:event_buttonDivActionPerformed
 
     private void buttonCleanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCleanActionPerformed
@@ -411,34 +348,23 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonCleanActionPerformed
 
     private void buttonSubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSubActionPerformed
-        if ((!labelVisor.getText().contains("/")) &&
-                (!labelVisor.getText().contains("x")) &&
-                (!labelVisor.getText().contains("-")) &&
-                (!labelVisor.getText().contains("+"))) {
-            labelVisor.setText(labelVisor.getText() + "-");
-        }
+        operacao("-");
     }//GEN-LAST:event_buttonSubActionPerformed
 
     private void button9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button9ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 9);
-        } else {
-            labelVisor.setText("9");
-        
+        {
+        inserir("9");
         }    }//GEN-LAST:event_button9ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
-        if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals(0))){
-            labelVisor.setText(labelVisor.getText() + 7);
-        } else {
-            labelVisor.setText("7");
+        {
+        inserir("7");
         }    }//GEN-LAST:event_button7ActionPerformed
+
 
     private void button0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button0ActionPerformed
         if (labelVisor.getText() != "0"){
             labelVisor.setText(labelVisor.getText() + 0);
-        } else {
-            labelVisor.setText("0");
         }
     }//GEN-LAST:event_button0ActionPerformed
 
@@ -477,6 +403,51 @@ public class Calculadora extends javax.swing.JFrame {
         });
     }
 
+    private void inserir(String numero) {
+         if ((labelVisor.getText().length() == 1) && (labelVisor.getText().equals("0"))){
+            labelVisor.setText(numero);
+        } else {
+            labelVisor.setText(labelVisor.getText() + numero);
+        }
+    }
+    
+    private void operacao(String operacao) {
+        if ((!labelVisor.getText().contains("/")) &&
+                (!labelVisor.getText().contains("x")) &&
+                (!labelVisor.getText().contains("-")) &&
+                (!labelVisor.getText().contains("+"))) {
+            labelVisor.setText(labelVisor.getText() + operacao);
+        }
+    }
+    
+    private void calcular(){
+        String visor = labelVisor.getText();
+        int resultado = 0;
+        labelResultado.setText("Resultado:");
+        
+        if (visor.contains("+")){
+            String[] valor = visor.split("\\+");
+            resultado = Integer.parseInt(valor[0]) + Integer.parseInt(valor[1]);
+        } else if (visor.contains("-")){
+            String[] valor = visor.split("\\-");
+            resultado = Integer.parseInt(valor[0]) - Integer.parseInt(valor[1]);
+        } if (visor.contains("x")){
+            String[] valor = visor.split("x");
+            resultado = Integer.parseInt(valor[0]) * Integer.parseInt(valor[1]);
+        } else if (visor.contains("/")){
+            String[] valor = visor.split("\\/");
+            
+            if (valor[1].equals("0")) {
+                labelResultado.setText("Operação inválida! Impossível divisão por 0.");
+            } else {
+                resultado = Integer.parseInt(valor[0]) / Integer.parseInt(valor[1]);
+            }
+        }
+        
+        visor = String.valueOf(resultado);
+        labelVisor.setText(visor);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button0;
     private javax.swing.JButton button1;
@@ -488,14 +459,14 @@ public class Calculadora extends javax.swing.JFrame {
     private javax.swing.JButton button7;
     private javax.swing.JButton button8;
     private javax.swing.JButton button9;
-    private javax.swing.JButton buttonAdd;
     private javax.swing.JButton buttonClean;
     private javax.swing.JButton buttonDiv;
     private javax.swing.JButton buttonEqual;
     private javax.swing.JButton buttonMulti;
     private javax.swing.JButton buttonSub;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton buttonSum;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelResultado;
     private javax.swing.JLabel labelVisor;
     // End of variables declaration//GEN-END:variables
 }
