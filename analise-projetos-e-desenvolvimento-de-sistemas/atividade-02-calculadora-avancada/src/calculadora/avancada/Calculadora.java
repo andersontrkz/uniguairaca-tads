@@ -312,7 +312,9 @@ public class Calculadora extends javax.swing.JFrame {
     }//GEN-LAST:event_button3ActionPerformed
 
     private void buttonEqualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEqualActionPerformed
-        calcular();
+    if(verificaVisor()){
+            calcular();
+        }
     }//GEN-LAST:event_buttonEqualActionPerformed
 
     private void button8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button8ActionPerformed
@@ -420,7 +422,39 @@ public class Calculadora extends javax.swing.JFrame {
         }
     }
     
-    private void calcular(){
+    private boolean contemNumero(String valor) {
+        return valor.contains("1") ||
+                valor.contains("2") ||
+                valor.contains("3") ||
+                valor.contains("4") ||
+                valor.contains("5") ||
+                valor.contains("6") ||
+                valor.contains("7") ||
+                valor.contains("8") ||
+                valor.contains("9") ||
+                valor.contains("0");
+    }
+    
+    private boolean verificaVisor() {
+        String visor = labelVisor.getText();
+        
+        if (visor.contains("+")){
+            String[] valor = visor.split("\\+");
+            return (valor.length == 2) ? true : false;
+        } else if (visor.contains("-")){
+            String[] valor = visor.split("\\-");
+            return (valor.length == 2 && contemNumero(valor[0])) ? true : false;
+        } if (visor.contains("x")){
+            String[] valor = visor.split("x");
+            return (valor.length == 2) ? true : false;
+        } else if (visor.contains("/")){
+            String[] valor = visor.split("\\/");
+            return (valor.length == 2) ? true : false;
+        }
+        return false;
+    }
+    
+    private void calcular() {
         String visor = labelVisor.getText();
         int resultado = 0;
         labelResultado.setText("Resultado:");
